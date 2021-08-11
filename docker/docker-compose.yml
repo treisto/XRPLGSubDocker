@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+    rippled-1:
+        #command: ['/opt/ripple/bin/rippled --conf /etc/opt/ripple/rippled2.cfg --quorum=2 && tail -f /dev/null']
+        #command: ['node /sntrippled/grpc/one4all.js']
+        build:
+            context: ../docker-Grippled-validator
+            dockerfile: ./Dockerfile
+        #container_name: rippled-1
+        entrypoint: /entrypoint1.sh
+        ports:
+            - 51235
+        networks:
+            rip_rip:
+              ipv4_address: 172.16.238.10
+        tty: true
+        stdin_open: true
+        cap_add:
+            - NET_ADMIN
+    rippled-2:
+        #command: ['/opt/ripple/bin/rippled --conf /etc/opt/ripple/rippled2.cfg --quorum=2 && tail -f /dev/null']
+        #command: ['node /sntrippled/grpc/one4all.js']
+        build:
+            context: ../docker-Grippled-validator
+            dockerfile: ./Dockerfile
+        entrypoint: /entrypoint2.sh
+        ports:
+            - 51235
+        networks:
+            rip_rip:
+              ipv4_address: 172.16.238.11
+        tty: true
+        stdin_open: true
+        cap_add:
+            - NET_ADMIN
+    rippled-3:
+        #command: ['/opt/ripple/bin/rippled --conf /etc/opt/ripple/rippled3.cfg --quorum=2 && tail -f /dev/null']
+        #command: ['node /sntrippled/grpc/one4all.js']
+        build:
+            context: ../docker-Grippled-validator
+            dockerfile: ./Dockerfile
+        entrypoint: /entrypoint3.sh
+        ports:
+            - 51235
+        networks:
+            rip_rip:
+              ipv4_address: 172.16.238.12
+        tty: true
+        stdin_open: true
+        cap_add:
+            - NET_ADMIN
+networks:
+    rip_rip:
+            #external: true
+            ipam:
+                driver: default
+                config:
+                    - subnet: 172.16.0.0/16
+                      ip_range: 172.16.238.0/24
+                      gateway: 172.16.238.254
+                      #aux_addresses:
+                      #   rippled-1: 172.16.238.10
+                      #   rippled-2: 172.16.238.11
+                      #  rippled-3: 172.16.238.12
