@@ -48,6 +48,19 @@ However at this stage the corresponding rippled nodes in each container must be 
 From my practical experience with this docker-compose project, it is better to start the Gossipsub first and Rippled after (which I do now).
 Starting Rippled first and GossipSub after had 100% crashed Rippled.
 
-
-
-
+## Get interval between ledgers from debug.log
+```
+grep -F saveValidatedLedger Gdebug2.log
+```
+- Full clean of docker images
+```
+sudo docker rmi -f $(sudo docker images -a -q)
+```
+- Cleanup containers
+```
+sudo docker system prune
+```
+- Show containers
+```
+sudo docker ps -a
+```
