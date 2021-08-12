@@ -44,8 +44,9 @@
 #fi
 
 # Start rippled, Passthrough other arguments
-/root/.nvm/versions/node/v14.17.3/bin/node /sntrippled/grpc/one4all.js
-exec /opt/ripple/bin/rippled --conf /opt/ripple/etc/rippled2.cfg --quorum 2 "$@"
+/root/.nvm/versions/node/v14.17.3/bin/node /sntrippled/grpc/one4all.js &
+sleep 20
+/opt/ripple/bin/rippled --conf /opt/ripple/etc/rippled2.cfg --quorum 2 "$@"
 ##exec /root/.nvm/versions/node/v14.17.3/bin/node /sntrippled/grpc/one4all.js
 ##exec node /hello.js
 #exec bash
